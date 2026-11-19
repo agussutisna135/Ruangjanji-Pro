@@ -6,6 +6,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    base: '/Ruangjanji-Pro/',
     plugins: [
       react(),
       tailwindcss(),
