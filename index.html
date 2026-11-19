@@ -2,6 +2,31 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function() {
+        const repo = '/Ruangjanji-Pro';
+        const fixPath = (el, attr) => {
+          const val = el.getAttribute(attr);
+          if (val && val.startsWith('/') && !val.startsWith(repo) && !val.startsWith('//')) {
+            el.setAttribute(attr, repo + val);
+          }
+        };
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((m) => {
+            m.addedNodes.forEach((node) => {
+              if (node.nodeType === 1) {
+                if (node.tagName === 'IMG') fixPath(node, 'src');
+                node.querySelectorAll && node.querySelectorAll('img').forEach(img => fixPath(img, 'src'));
+              }
+            });
+            if (m.type === 'attributes' && m.target.tagName === 'IMG') {
+              fixPath(m.target, 'src');
+            }
+          });
+        });
+        observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>RUANGJANJI PRO — Create Your Beautiful Moments</title>
     <meta
