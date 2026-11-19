@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ivory: #FAF8F4;
+    --cream: #F3EFE6;
+    --champagne: #C6A259;
+    --champagne-deep: #9E7C38;
+    --emerald-deep: #0F2C23;
+    --emerald-mid: #1A4336;
+    --ink: #17201C;
+    --muted: #5F6B65;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: clip;
+  }
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-bodoni {
+  font-family: 'Bodoni Moda', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+}
+
+.font-fraunces {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.font-lora {
+  font-family: 'Lora', Georgia, serif;
+}
+
+.font-dm {
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.safe-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom sleek scrollbars for editor panels */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(15, 44, 35, 0.16);
+  border-radius: 999px;
+}

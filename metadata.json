@@ -1,0 +1,6 @@
+{
+  "name": "RUANGJANJI PRO",
+  "description": "Platform pembuat undangan pernikahan digital premium dengan 60 tema foto asli, editor desain visual, RSVP & buku tamu real-time, amplop digital, musik latar, dan ekspor HTML mandiri.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
