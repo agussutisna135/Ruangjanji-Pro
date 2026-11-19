@@ -5,22 +5,38 @@
     <script>
       (function() {
         const repo = '/Ruangjanji-Pro';
-        const fixPath = (el, attr) => {
-          const val = el.getAttribute(attr);
-          if (val && val.startsWith('/') && !val.startsWith(repo) && !val.startsWith('//')) {
-            el.setAttribute(attr, repo + val);
+        const fixUrl = (val) => {
+          if (typeof val === 'string' && val.startsWith('/') && !val.startsWith(repo) && !val.startsWith('//')) {
+            return repo + val;
           }
+          return val;
+        };
+
+        const origFetch = window.fetch;
+        window.fetch = function(input, init) {
+          if (typeof input === 'string') {
+            input = fixUrl(input);
+          } else if (input instanceof Request) {
+            input = new Request(fixUrl(input.url), input);
+          }
+          return origFetch.call(this, input, init);
+        };
+
+        const fixAttr = (el, attr) => {
+          const val = el.getAttribute(attr);
+          const fixed = fixUrl(val);
+          if (fixed !== val) el.setAttribute(attr, fixed);
         };
         const observer = new MutationObserver((mutations) => {
           mutations.forEach((m) => {
             m.addedNodes.forEach((node) => {
               if (node.nodeType === 1) {
-                if (node.tagName === 'IMG') fixPath(node, 'src');
-                node.querySelectorAll && node.querySelectorAll('img').forEach(img => fixPath(img, 'src'));
+                if (node.tagName === 'IMG') fixAttr(node, 'src');
+                node.querySelectorAll && node.querySelectorAll('img').forEach(img => fixAttr(img, 'src'));
               }
             });
             if (m.type === 'attributes' && m.target.tagName === 'IMG') {
-              fixPath(m.target, 'src');
+              fixAttr(m.target, 'src');
             }
           });
         });
